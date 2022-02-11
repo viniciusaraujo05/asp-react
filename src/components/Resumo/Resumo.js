@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 class Resumo extends Component {
+   
     constructor(props){
         super(props);
         this.state = {
@@ -22,10 +23,12 @@ class Resumo extends Component {
     }
 
     componentDidMount(){
-        fetch("http://www.devup.com.br/php/api-dashboard/resumo")
-        .then(resultado => resultado.json().then(dados => this.setState(dados)));
+        fetch("http://www.devup.com.br/php/api-dashboard/api/resumo").then(
+            resultado => resultado.json().then(
+                dados => this.setState(dados)
+            )
+        );
     }
-    console.log(componentDidMount);
 
     render(){
      return (
@@ -71,8 +74,8 @@ class Resumo extends Component {
                           <div className="card-body">
                               { this.state.faturamento.anterior.valor.toLocaleString("pt-BR", { style : "currency",
                                   currency : "BRL"}) }
-                              <span className={ "badge ml-1 " + (this.state.faturamento.anterior.comparativo > 0 ?
-                                  "badge-success" : "badge-danger")}>
+                              <span className={ "badge bg-secondary" + (this.state.faturamento.previsao.comparativo > 0 ?
+                                   "badge bg-success" : "badge bg-danger") }>
                                  { this.state.faturamento.anterior.comparativo } %
                               </span>
                           </div>
@@ -86,8 +89,8 @@ class Resumo extends Component {
                           <div className="card-body">
                               { this.state.faturamento.previsao.valor.toLocaleString("pt-BR", { style : "currency",
                                    currency : "BRL"}) }
-                              <span className={ "badge ml-1 " + (this.state.faturamento.previsao.comparativo > 0 ?
-                                   "badge-success" : "badge-danger") }>
+                              <span className={ "badge bg-secondary" + (this.state.faturamento.previsao.comparativo > 0 ?
+                                   "badge bg-success" : "badge bg-danger") }>
                                   { this.state.faturamento.previsao.comparativo } %
                               </span>
                           </div>
